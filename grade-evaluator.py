@@ -31,14 +31,14 @@ def load_csv_data():
 
 def evaluate_grades(data):
 
-    # 'data' is a list of dictionaries containing the assignment records.
+    # here data will be a list of dictionaries containing the assignment records.
     print("\nProcessing Grades")
 
     if not data:
         print("No assignment records found. Nothing to evaluate.")
         return
-
-    # Check if all scores are percentage based (0-100)
+    
+    # lets check if all scores are percentage based (0-100)
     invalid_scores = []
     for a in data:
         if a['score'] < 0 or a['score'] > 100:
