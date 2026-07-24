@@ -66,16 +66,16 @@ def evaluate_grades(data):
     formative_weight = round(formative_weight, 2)
 
     if total_weight != 100 or summative_weight != 40 or formative_weight != 60:
-        print("Error: Weight validation failed:")
+        print("Error: Weight validation faled:")
         if total_weight != 100:
-            print(f"  - Total weight is {total_weight}, but it must equal 100.")
+            print(f"Total weight is {total_weight}, but it must equal 100.")
         if summative_weight != 40:
-            print(f"  - Summative weight is {summative_weight}, but it must equal 40.")
+            print(f"Summative weight is {summative_weight}, but it must equal 40.")
         if formative_weight != 60:
-            print(f"  - Formative weight is {formative_weight}, but it must equal 60.")
+            print(f"Formative weight is {formative_weight}, but it must equal 60.")
         return
 
-    # c) Calculate the Final Grade and GPA
+    # Calculate the final grade and gpa
     total_points = 0
     summative_points = 0
     formative_points = 0
@@ -93,24 +93,23 @@ def evaluate_grades(data):
 
     print(f"Total Grade: {total_grade:.2f}%")
     print(f"GPA: {gpa:.2f}")
-    print(f"Summative Category Score: {summative_pct:.2f}%")
-    print(f"Formative Category Score: {formative_pct:.2f}%")
+    print(f"Summative Score: {summative_pct:.2f}%")
+    print(f"Formative Score: {formative_pct:.2f}%")
 
-    # d) Determine Pass/Fail status (>= 50% in BOTH categories)
+    # Determine if its pas or fail status (>= 50% in all categories)
     if summative_pct >= 50 and formative_pct >= 50:
         status = "PASSED"
     else:
         status = "FAILED"
     print(f"\nFinal Status: {status}")
 
-    # e) Check for failed formative assignments (< 50%) and find the
-    #    highest-weight one(s) for resubmission.
+    # Check for failed formative assignments basically < 50% and find the highest ones for resubmission.
     failed_formatives = []
     for a in data:
         if a['group'] == 'Formative' and a['score'] < 50:
             failed_formatives.append(a)
 
-    # f) Print the final decision and resubmission options
+    # Print the final decision and resubmission options
     if failed_formatives:
         max_weight = failed_formatives[0]['weight']
         for a in failed_formatives:
